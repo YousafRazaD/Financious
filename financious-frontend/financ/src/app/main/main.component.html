@@ -1,0 +1,41 @@
+<!-- The sidebar -->
+<!-- The sidebar -->
+<div class="sidebar">
+    <p class="active" href="#home">
+        {{user.name}}
+    </p>
+    <p href="#news">
+        {{user.email}}
+    </p>
+  </div>
+  
+  <!-- Page content -->
+  <div class="content">
+    <p *ngIf = "!selected" class="h3">Select Month</p>
+    <select ngModel = "selctedMonth" (ngModelChange) = "onChange($event)" id="select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+        <option *ngFor = "let month of months" value="{{month.month}}">
+            Month {{month.month}}
+        </option>
+      </select>
+      <div style="border: crimson; border-style: solid;margin:3%;padding: 5%;" *ngIf = "selected">
+        <p class ="h5">Income:{{month.totalIn}}</p>
+        <p class ="h5">Spent:{{month.totalOut}}</p>
+        <p class ="h5">Transactions:</p>
+        <div *ngFor ="let trans of trans">
+            <div style="border: indigo;border-style: solid;padding: 3%;margin: 1%;">
+                <p class="h6">No: {{trans.trans_no}}</p>
+                <p class="small">Amount: {{trans.amount}}</p>
+                <p class="small">Description: {{trans.desc}}</p>
+            </div>
+        </div>
+        <google-chart 
+    [type]="myType" 
+    [data]="myData" 
+    [width]="width"
+    [height]="height">
+      
+</google-chart>
+        <button type="button" class="btn btn-danger" id = "btn-{no}" (click)="deleteHistory()">Delete History</button>
+      </div>
+  </div>
+
